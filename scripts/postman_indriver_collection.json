@@ -1,0 +1,597 @@
+{
+    "info": {
+      "name": "InDriver API - Completa",
+      "description": "Colección completa con todos los endpoints del sistema InDriver",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "📊 Estadísticas",
+        "item": [
+          {
+            "name": "Obtener Estadísticas del Sistema",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/statistics",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "statistics"]
+              },
+              "description": "Obtiene estadísticas generales del sistema"
+            }
+          }
+        ]
+      },
+      {
+        "name": "👥 Usuarios Generales",
+        "item": [
+          {
+            "name": "Listar Todos los Usuarios",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/users",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "users"]
+              }
+            }
+          },
+          {
+            "name": "Obtener Usuario por ID",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/users/DRV001",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "users", "DRV001"]
+              }
+            }
+          },
+          {
+            "name": "Eliminar Usuario por ID",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/users/DRV001",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "users", "DRV001"]
+              }
+            }
+          },
+          {
+            "name": "Eliminar TODOS los Usuarios",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/users",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "users"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "🚗 Conductores",
+        "item": [
+          {
+            "name": "Crear Conductor 1 - Carlos",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"DRV001\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Ramírez\",\n  \"email\": \"carlos.ramirez@indriver.com\",\n  \"contact\": {\n    \"email\": \"carlos.ramirez@indriver.com\",\n    \"phone\": \"+57 300 123 4567\",\n    \"address\": {\n      \"street\": \"Calle 45 #12-34\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110111\",\n      \"latitude\": 4.7110,\n      \"longitude\": -74.0721\n    }\n  },\n  \"driverId\": \"DRV-2024-001\",\n  \"licenseNumber\": \"CO-123456789\",\n  \"vehicle\": {\n    \"plate\": \"ABC-123\",\n    \"brand\": \"Chevrolet\",\n    \"model\": \"Spark GT\",\n    \"year\": 2022,\n    \"color\": \"Blanco\",\n    \"type\": \"HATCHBACK\"\n  }\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers"]
+              }
+            }
+          },
+          {
+            "name": "Crear Conductor 2 - María",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"DRV002\",\n  \"firstName\": \"María\",\n  \"lastName\": \"González\",\n  \"email\": \"maria.gonzalez@indriver.com\",\n  \"contact\": {\n    \"email\": \"maria.gonzalez@indriver.com\",\n    \"phone\": \"+57 310 987 6543\",\n    \"address\": {\n      \"street\": \"Carrera 30 #50-60\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110121\"\n    }\n  },\n  \"driverId\": \"DRV-2024-002\",\n  \"licenseNumber\": \"CO-987654321\",\n  \"vehicle\": {\n    \"plate\": \"XYZ-789\",\n    \"brand\": \"Renault\",\n    \"model\": \"Logan\",\n    \"year\": 2021,\n    \"color\": \"Gris\",\n    \"type\": \"SEDAN\"\n  }\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers"]
+              }
+            }
+          },
+          {
+            "name": "Crear Conductor 3 - Pedro",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"DRV003\",\n  \"firstName\": \"Pedro\",\n  \"lastName\": \"Martínez\",\n  \"email\": \"pedro.martinez@indriver.com\",\n  \"contact\": {\n    \"email\": \"pedro.martinez@indriver.com\",\n    \"phone\": \"+57 320 555 9999\",\n    \"address\": {\n      \"street\": \"Avenida 68 #25-80\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110911\"\n    }\n  },\n  \"driverId\": \"DRV-2024-003\",\n  \"licenseNumber\": \"CO-555666777\",\n  \"vehicle\": {\n    \"plate\": \"DEF-456\",\n    \"brand\": \"Mazda\",\n    \"model\": \"2\",\n    \"year\": 2023,\n    \"color\": \"Rojo\",\n    \"type\": \"HATCHBACK\"\n  }\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers"]
+              }
+            }
+          },
+          {
+            "name": "Listar Todos los Conductores",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/drivers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers"]
+              }
+            }
+          },
+          {
+            "name": "Listar Conductores Disponibles",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/drivers/available",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers", "available"]
+              }
+            }
+          },
+          {
+            "name": "Actualizar Ubicación del Conductor",
+            "request": {
+              "method": "PUT",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"latitude\": 4.7110,\n  \"longitude\": -74.0721\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers/DRV001/location",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers", "DRV001", "location"]
+              }
+            }
+          },
+          {
+            "name": "Cambiar Disponibilidad - Activar",
+            "request": {
+              "method": "PUT",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"available\": true\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers/DRV001/availability",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers", "DRV001", "availability"]
+              }
+            }
+          },
+          {
+            "name": "Cambiar Disponibilidad - Desactivar",
+            "request": {
+              "method": "PUT",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"available\": false\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers/DRV001/availability",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers", "DRV001", "availability"]
+              }
+            }
+          },
+          {
+            "name": "Agregar Calificación al Conductor",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"rideId\": \"RIDE001\",\n  \"rating\": 5,\n  \"comment\": \"Excelente conductor, muy amable y puntual\",\n  \"date\": \"2025-10-23T23:00:00Z\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/drivers/DRV001/ratings",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers", "DRV001", "ratings"]
+              }
+            }
+          },
+          {
+            "name": "Ver Viajes del Conductor",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/drivers/DRV001/rides",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "drivers", "DRV001", "rides"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "👤 Pasajeros",
+        "item": [
+          {
+            "name": "Crear Pasajero 1 - Juan",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"PSG001\",\n  \"firstName\": \"Juan\",\n  \"lastName\": \"Pérez\",\n  \"email\": \"juan.perez@gmail.com\",\n  \"contact\": {\n    \"email\": \"juan.perez@gmail.com\",\n    \"phone\": \"+57 315 555 1234\",\n    \"address\": {\n      \"street\": \"Calle 100 #15-20\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110111\"\n    }\n  },\n  \"passengerId\": \"PSG-2024-001\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/passengers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers"]
+              }
+            }
+          },
+          {
+            "name": "Crear Pasajero 2 - Ana",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"PSG002\",\n  \"firstName\": \"Ana\",\n  \"lastName\": \"Martínez\",\n  \"email\": \"ana.martinez@gmail.com\",\n  \"contact\": {\n    \"email\": \"ana.martinez@gmail.com\",\n    \"phone\": \"+57 318 444 5678\",\n    \"address\": {\n      \"street\": \"Avenida 19 #80-50\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110221\"\n    }\n  },\n  \"passengerId\": \"PSG-2024-002\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/passengers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers"]
+              }
+            }
+          },
+          {
+            "name": "Crear Pasajero 3 - Laura",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"PSG003\",\n  \"firstName\": \"Laura\",\n  \"lastName\": \"García\",\n  \"email\": \"laura.garcia@gmail.com\",\n  \"contact\": {\n    \"email\": \"laura.garcia@gmail.com\",\n    \"phone\": \"+57 312 777 8888\",\n    \"address\": {\n      \"street\": \"Calle 85 #15-30\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110221\"\n    }\n  },\n  \"passengerId\": \"PSG-2024-003\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/passengers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers"]
+              }
+            }
+          },
+          {
+            "name": "Listar Todos los Pasajeros",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/passengers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers"]
+              }
+            }
+          },
+          {
+            "name": "Agregar Fondos a Pasajero",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"amount\": 50000\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/passengers/PSG001/add-funds",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers", "PSG001", "add-funds"]
+              }
+            }
+          },
+          {
+            "name": "Agregar Conductor a Favoritos",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"driverId\": \"DRV001\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/passengers/PSG001/favorite-drivers",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers", "PSG001", "favorite-drivers"]
+              }
+            }
+          },
+          {
+            "name": "Ver Viajes del Pasajero",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/passengers/PSG001/rides",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "passengers", "PSG001", "rides"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "👨‍💼 Administradores",
+        "item": [
+          {
+            "name": "Crear Administrador",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"ADM001\",\n  \"firstName\": \"Pedro\",\n  \"lastName\": \"López\",\n  \"email\": \"pedro.lopez@indriver.com\",\n  \"contact\": {\n    \"email\": \"pedro.lopez@indriver.com\",\n    \"phone\": \"+57 320 111 2222\",\n    \"address\": {\n      \"street\": \"Calle 72 #10-50\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110231\"\n    }\n  },\n  \"adminId\": \"ADM-2024-001\",\n  \"department\": \"Operaciones\",\n  \"accessLevel\": 4\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/administrators",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "administrators"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "🗺️ Viajes",
+        "item": [
+          {
+            "name": "Crear Viaje 1 - Aeropuerto",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"RIDE001\",\n  \"passengerId\": \"PSG001\",\n  \"origin\": {\n    \"address\": \"Calle 100 #15-20, Bogotá\",\n    \"latitude\": 4.6862,\n    \"longitude\": -74.0563\n  },\n  \"destination\": {\n    \"address\": \"Aeropuerto El Dorado, Bogotá\",\n    \"latitude\": 4.7016,\n    \"longitude\": -74.1469\n  },\n  \"requestedPrice\": 35000,\n  \"distance\": 15.5,\n  \"estimatedDuration\": 25\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides"]
+              }
+            }
+          },
+          {
+            "name": "Crear Viaje 2 - Universidad",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"RIDE002\",\n  \"passengerId\": \"PSG001\",\n  \"origin\": {\n    \"address\": \"Centro Comercial Santafé, Bogotá\",\n    \"latitude\": 4.7234,\n    \"longitude\": -74.0424\n  },\n  \"destination\": {\n    \"address\": \"Universidad Nacional, Bogotá\",\n    \"latitude\": 4.6389,\n    \"longitude\": -74.0834\n  },\n  \"requestedPrice\": 25000,\n  \"distance\": 10.2,\n  \"estimatedDuration\": 18\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides"]
+              }
+            }
+          },
+          {
+            "name": "Crear Viaje 3 - Parque 93",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"id\": \"RIDE003\",\n  \"passengerId\": \"PSG002\",\n  \"origin\": {\n    \"address\": \"Avenida 19 #80-50, Bogotá\",\n    \"latitude\": 4.6673,\n    \"longitude\": -74.0557\n  },\n  \"destination\": {\n    \"address\": \"Parque de la 93, Bogotá\",\n    \"latitude\": 4.6764,\n    \"longitude\": -74.0469\n  },\n  \"requestedPrice\": 18000,\n  \"distance\": 5.8,\n  \"estimatedDuration\": 12\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides"]
+              }
+            }
+          },
+          {
+            "name": "Listar Todos los Viajes",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/rides",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides"]
+              }
+            }
+          },
+          {
+            "name": "Listar Viajes Disponibles",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/rides/available",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "available"]
+              }
+            }
+          },
+          {
+            "name": "Obtener Viaje por ID",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/rides/RIDE001",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "RIDE001"]
+              }
+            }
+          },
+          {
+            "name": "Aceptar Viaje (Conductor)",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"driverId\": \"DRV001\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides/RIDE001/accept",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "RIDE001", "accept"]
+              }
+            }
+          },
+          {
+            "name": "Iniciar Viaje",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/rides/RIDE001/start",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "RIDE001", "start"]
+              }
+            }
+          },
+          {
+            "name": "Completar Viaje - Efectivo",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"finalPrice\": 35000,\n  \"payment\": {\n    \"amount\": 35000,\n    \"method\": \"CASH\",\n    \"currency\": \"COP\",\n    \"date\": \"2025-10-23T23:00:00Z\"\n  }\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides/RIDE001/complete",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "RIDE001", "complete"]
+              }
+            }
+          },
+          {
+            "name": "Completar Viaje - Tarjeta",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"finalPrice\": 25000,\n  \"payment\": {\n    \"amount\": 25000,\n    \"method\": \"CARD\",\n    \"currency\": \"COP\",\n    \"date\": \"2025-10-23T23:00:00Z\"\n  }\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides/RIDE002/complete",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "RIDE002", "complete"]
+              }
+            }
+          },
+          {
+            "name": "Cancelar Viaje",
+            "request": {
+              "method": "POST",
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"reason\": \"El pasajero canceló el viaje\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/rides/RIDE003/cancel",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "rides", "RIDE003", "cancel"]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
