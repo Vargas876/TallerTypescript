@@ -579,7 +579,7 @@
               "header": [{"key": "Content-Type", "value": "application/json"}],
               "body": {
                 "mode": "raw",
-                "raw": "{\n  \"reason\": \"El pasajero canceló el viaje\"\n}"
+                "raw": "{\n  \"reason\": \"El pasajero cancelo el viaje\"\n}"
               },
               "url": {
                 "raw": "http://localhost:3000/api/rides/RIDE003/cancel",
