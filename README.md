@@ -63,29 +63,33 @@ Proyecto académico full-stack que implementa un sistema completo de gestión de
 godrive-typescript-project/
 ├── src/
 │   ├── interfaces/
-│   │   └── index.ts              # Interfaces, Types y Enums
+│   │   └── index.ts
 │   ├── models/
-│   │   ├── User.ts               # Clase abstracta base
-│   │   ├── Driver.ts             # Hereda de User
-│   │   ├── Passenger.ts          # Hereda de User
-│   │   ├── Administrator.ts      # Hereda de User
-│   │   └── Ride.ts               # Modelo de viajes
-│   └── backend/
-│       ├── mongoDatabase.ts      # Singleton MongoDB Atlas
-│       ├── rideService.ts        # Lógica de negocio de viajes
-│       └── server.ts             # Servidor Express + API REST
+│   │   ├── User.ts
+│   │   ├── Driver.ts
+│   │   ├── Passenger.ts
+│   │   ├── Administrator.ts
+│   │   └── Ride.ts
+│   ├── backend/
+│   │   ├── mongoDatabase.ts
+│   │   ├── rideService.ts
+│   │   └── server.ts
+│   └── frontend/
+│       └── app.ts
 ├── public/
-│   ├── index.html                # Página principal
+│   ├── index.html
 │   ├── css/
-│   │   └── styles.css            # Estilos personalizados
+│   │   └── styles.css
 │   └── js/
-│       └── app.js                # Lógica del frontend
-├── dist/                         # Código TypeScript compilado
-├── .env                          # Variables de entorno (MongoDB)
+│       └── app.js
+├── dist/
+├── .env
+├── .gitignore
 ├── package.json
 ├── tsconfig.json
-├── .gitignore
+├── tsconfig.frontend.json
 └── README.md
+
 ```
 
 ---

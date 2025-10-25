@@ -13,11 +13,14 @@
     "moduleResolution": "node"
   },
   "include": [
-    "src/**/*"
+    "src/interfaces/**/*",
+    "src/models/**/*",
+    "src/backend/**/*"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "public"
+    "public",
+    "src/frontend"
   ]
 }

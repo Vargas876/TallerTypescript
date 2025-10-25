@@ -4,12 +4,15 @@
     "description": "Sistema de gestión de viajes con TypeScript y POO",
     "main": "dist/backend/server.js",
     "scripts": {
+      "build:backend": "tsc -p tsconfig.json",
+      "build:frontend": "tsc -p tsconfig.frontend.json",
+      "build": "npm run build:backend && npm run build:frontend",
       "dev": "ts-node src/backend/server.ts",
-      "build": "tsc",
-      "start": "node dist/backend/server.js"
+      "start": "node dist/backend/server.js",
+      "watch:frontend": "tsc -p tsconfig.frontend.json --watch"
     },
     "keywords": ["typescript", "express", "mongodb", "poo"],
-    "author": "Tu Nombre",
+    "author": "Juan Vargas",
     "license": "MIT",
     "dependencies": {
       "cors": "^2.8.5",

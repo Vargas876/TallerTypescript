@@ -36,9 +36,9 @@ export class MongoDatabase {
       await this.ridesCollection.createIndex({ passengerId: 1 });
       await this.ridesCollection.createIndex({ driverId: 1 });
       
-      console.log('✅ Conectado a MongoDB Atlas');
+      console.log(' Conectado a MongoDB Atlas');
     } catch (error) {
-      console.error('❌ Error conectando a MongoDB:', error);
+      console.error(' Error conectando a MongoDB:', error);
       throw error;
     }
   }

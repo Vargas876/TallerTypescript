@@ -691,13 +691,11 @@ async function startServer() {
     // Iniciar servidor Express
     app.listen(port, () => {
       console.log('\n================================================');
-      console.log('🚀 GODRIVE - Sistema de Gestión de Viajes');
+      console.log(' GODRIVE - Sistema de Gestión de Viajes');
       console.log('================================================');
-      console.log(`🌐 Servidor ejecutándose en puerto ${port}`);
-      console.log(`📍 URL: http://localhost:${port}`);
-      console.log('✅ TypeScript con POO implementado');
-      console.log('📡 API REST disponible');
-      console.log('🗄️  MongoDB Atlas conectado exitosamente');
+      console.log(` Servidor ejecutándose en puerto ${port}`);
+      console.log(` URL: http://localhost:${port}`);
+      console.log(' MongoDB Atlas conectado exitosamente');
       console.log('================================================');
       console.log('\n📋 Endpoints disponibles:');
       console.log('\n👥 Usuarios:');
@@ -734,8 +732,8 @@ async function startServer() {
       console.log('================================================\n');
     });
   } catch (error) {
-    console.error('❌ Error al iniciar el servidor:', error);
-    console.error('💡 Verifica tu connection string de MongoDB Atlas en .env');
+    console.error(' Error al iniciar el servidor:', error);
+    console.error(' Verifica tu connection string de MongoDB Atlas en .env');
     process.exit(1);
   }
 }
@@ -745,34 +743,34 @@ async function startServer() {
 // ============================================
 
 process.on('SIGINT', async () => {
-  console.log('\n\n🛑 Recibida señal de interrupción...');
-  console.log('🔄 Cerrando conexiones...');
+  console.log('\n\n Recibida señal de interrupción...');
+  console.log(' Cerrando conexiones...');
   
   try {
     await mongoDb.disconnect();
-    console.log('✅ Conexiones cerradas exitosamente');
-    console.log('👋 ¡Hasta pronto!');
+    console.log(' Conexiones cerradas exitosamente');
+    console.log(' ¡Hasta pronto!');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error al cerrar conexiones:', error);
+    console.error(' Error al cerrar conexiones:', error);
     process.exit(1);
   }
 });
 
 process.on('SIGTERM', async () => {
-  console.log('\n\n🛑 Recibida señal de terminación...');
+  console.log('\n\n Recibida señal de terminación...');
   await mongoDb.disconnect();
   process.exit(0);
 });
 
 // Manejar errores no capturados
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Promesa rechazada no manejada:', promise);
+  console.error(' Promesa rechazada no manejada:', promise);
   console.error('Razón:', reason);
 });
 
 process.on('uncaughtException', (error) => {
-  console.error('❌ Excepción no capturada:', error);
+  console.error(' Excepción no capturada:', error);
   process.exit(1);
 });
 
