@@ -2,7 +2,7 @@ import type { IContact, IRating, IVehicle, UserRole } from '../interfaces/index'
 import { User } from './User';
 
 /**
- * Clase Driver - Representa un conductor en InDriver
+ * Clase Driver - Representa un conductor en GoDrive
  */
 export class Driver extends User {
   private driverId: string;

@@ -1,5 +1,5 @@
 /**
- * Interfaces para el sistema InDriver
+ * Interfaces para el sistema GoDrive
  */
 
 export interface IAddress {

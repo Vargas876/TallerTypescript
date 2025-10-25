@@ -2,7 +2,7 @@ import type { IContact, UserRole } from '../interfaces/index';
 import { User } from './User';
 
 /**
- * Clase Administrator para gestión del sistema InDriver
+ * Clase Administrator para gestión del sistema GoDrive
  */
 export class Administrator extends User {
   private adminId: string;

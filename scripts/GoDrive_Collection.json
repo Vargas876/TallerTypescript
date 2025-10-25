@@ -1,7 +1,7 @@
 {
     "info": {
-      "name": "InDriver API - Completa",
-      "description": "Colección completa con todos los endpoints del sistema InDriver",
+      "name": "GoDrive API - Completa",
+      "description": "Colección completa con todos los endpoints del sistema GoDrive",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -96,7 +96,7 @@
               "header": [{"key": "Content-Type", "value": "application/json"}],
               "body": {
                 "mode": "raw",
-                "raw": "{\n  \"id\": \"DRV001\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Ramírez\",\n  \"email\": \"carlos.ramirez@indriver.com\",\n  \"contact\": {\n    \"email\": \"carlos.ramirez@indriver.com\",\n    \"phone\": \"+57 300 123 4567\",\n    \"address\": {\n      \"street\": \"Calle 45 #12-34\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110111\",\n      \"latitude\": 4.7110,\n      \"longitude\": -74.0721\n    }\n  },\n  \"driverId\": \"DRV-2024-001\",\n  \"licenseNumber\": \"CO-123456789\",\n  \"vehicle\": {\n    \"plate\": \"ABC-123\",\n    \"brand\": \"Chevrolet\",\n    \"model\": \"Spark GT\",\n    \"year\": 2022,\n    \"color\": \"Blanco\",\n    \"type\": \"HATCHBACK\"\n  }\n}"
+                "raw": "{\n  \"id\": \"DRV001\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Ramírez\",\n  \"email\": \"carlos.ramirez@GoDrive.com\",\n  \"contact\": {\n    \"email\": \"carlos.ramirez@GoDrive.com\",\n    \"phone\": \"+57 300 123 4567\",\n    \"address\": {\n      \"street\": \"Calle 45 #12-34\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110111\",\n      \"latitude\": 4.7110,\n      \"longitude\": -74.0721\n    }\n  },\n  \"driverId\": \"DRV-2024-001\",\n  \"licenseNumber\": \"CO-123456789\",\n  \"vehicle\": {\n    \"plate\": \"ABC-123\",\n    \"brand\": \"Chevrolet\",\n    \"model\": \"Spark GT\",\n    \"year\": 2022,\n    \"color\": \"Blanco\",\n    \"type\": \"HATCHBACK\"\n  }\n}"
               },
               "url": {
                 "raw": "http://localhost:3000/api/drivers",
@@ -114,7 +114,7 @@
               "header": [{"key": "Content-Type", "value": "application/json"}],
               "body": {
                 "mode": "raw",
-                "raw": "{\n  \"id\": \"DRV002\",\n  \"firstName\": \"María\",\n  \"lastName\": \"González\",\n  \"email\": \"maria.gonzalez@indriver.com\",\n  \"contact\": {\n    \"email\": \"maria.gonzalez@indriver.com\",\n    \"phone\": \"+57 310 987 6543\",\n    \"address\": {\n      \"street\": \"Carrera 30 #50-60\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110121\"\n    }\n  },\n  \"driverId\": \"DRV-2024-002\",\n  \"licenseNumber\": \"CO-987654321\",\n  \"vehicle\": {\n    \"plate\": \"XYZ-789\",\n    \"brand\": \"Renault\",\n    \"model\": \"Logan\",\n    \"year\": 2021,\n    \"color\": \"Gris\",\n    \"type\": \"SEDAN\"\n  }\n}"
+                "raw": "{\n  \"id\": \"DRV002\",\n  \"firstName\": \"María\",\n  \"lastName\": \"González\",\n  \"email\": \"maria.gonzalez@GoDrive.com\",\n  \"contact\": {\n    \"email\": \"maria.gonzalez@GoDrive.com\",\n    \"phone\": \"+57 310 987 6543\",\n    \"address\": {\n      \"street\": \"Carrera 30 #50-60\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110121\"\n    }\n  },\n  \"driverId\": \"DRV-2024-002\",\n  \"licenseNumber\": \"CO-987654321\",\n  \"vehicle\": {\n    \"plate\": \"XYZ-789\",\n    \"brand\": \"Renault\",\n    \"model\": \"Logan\",\n    \"year\": 2021,\n    \"color\": \"Gris\",\n    \"type\": \"SEDAN\"\n  }\n}"
               },
               "url": {
                 "raw": "http://localhost:3000/api/drivers",
@@ -132,7 +132,7 @@
               "header": [{"key": "Content-Type", "value": "application/json"}],
               "body": {
                 "mode": "raw",
-                "raw": "{\n  \"id\": \"DRV003\",\n  \"firstName\": \"Pedro\",\n  \"lastName\": \"Martínez\",\n  \"email\": \"pedro.martinez@indriver.com\",\n  \"contact\": {\n    \"email\": \"pedro.martinez@indriver.com\",\n    \"phone\": \"+57 320 555 9999\",\n    \"address\": {\n      \"street\": \"Avenida 68 #25-80\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110911\"\n    }\n  },\n  \"driverId\": \"DRV-2024-003\",\n  \"licenseNumber\": \"CO-555666777\",\n  \"vehicle\": {\n    \"plate\": \"DEF-456\",\n    \"brand\": \"Mazda\",\n    \"model\": \"2\",\n    \"year\": 2023,\n    \"color\": \"Rojo\",\n    \"type\": \"HATCHBACK\"\n  }\n}"
+                "raw": "{\n  \"id\": \"DRV003\",\n  \"firstName\": \"Pedro\",\n  \"lastName\": \"Martínez\",\n  \"email\": \"pedro.martinez@GoDrive.com\",\n  \"contact\": {\n    \"email\": \"pedro.martinez@GoDrive.com\",\n    \"phone\": \"+57 320 555 9999\",\n    \"address\": {\n      \"street\": \"Avenida 68 #25-80\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110911\"\n    }\n  },\n  \"driverId\": \"DRV-2024-003\",\n  \"licenseNumber\": \"CO-555666777\",\n  \"vehicle\": {\n    \"plate\": \"DEF-456\",\n    \"brand\": \"Mazda\",\n    \"model\": \"2\",\n    \"year\": 2023,\n    \"color\": \"Rojo\",\n    \"type\": \"HATCHBACK\"\n  }\n}"
               },
               "url": {
                 "raw": "http://localhost:3000/api/drivers",
@@ -392,7 +392,7 @@
               "header": [{"key": "Content-Type", "value": "application/json"}],
               "body": {
                 "mode": "raw",
-                "raw": "{\n  \"id\": \"ADM001\",\n  \"firstName\": \"Pedro\",\n  \"lastName\": \"López\",\n  \"email\": \"pedro.lopez@indriver.com\",\n  \"contact\": {\n    \"email\": \"pedro.lopez@indriver.com\",\n    \"phone\": \"+57 320 111 2222\",\n    \"address\": {\n      \"street\": \"Calle 72 #10-50\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110231\"\n    }\n  },\n  \"adminId\": \"ADM-2024-001\",\n  \"department\": \"Operaciones\",\n  \"accessLevel\": 4\n}"
+                "raw": "{\n  \"id\": \"ADM001\",\n  \"firstName\": \"Pedro\",\n  \"lastName\": \"López\",\n  \"email\": \"pedro.lopez@GoDrive.com\",\n  \"contact\": {\n    \"email\": \"pedro.lopez@GoDrive.com\",\n    \"phone\": \"+57 320 111 2222\",\n    \"address\": {\n      \"street\": \"Calle 72 #10-50\",\n      \"city\": \"Bogotá\",\n      \"country\": \"Colombia\",\n      \"zipCode\": \"110231\"\n    }\n  },\n  \"adminId\": \"ADM-2024-001\",\n  \"department\": \"Operaciones\",\n  \"accessLevel\": 4\n}"
               },
               "url": {
                 "raw": "http://localhost:3000/api/administrators",

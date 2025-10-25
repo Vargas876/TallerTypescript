@@ -2,7 +2,7 @@ import type { IContact, IPayment, IRating, UserRole } from '../interfaces/index'
 import { User } from './User';
 
 /**
- * Clase Passenger - Representa un pasajero en InDriver
+ * Clase Passenger - Representa un pasajero en GoDrive
  */
 export class Passenger extends User {
   private passengerId: string;
@@ -11,6 +11,7 @@ export class Passenger extends User {
   private favoriteDrivers: string[];
   private paymentHistory: IPayment[];
   private walletBalance: number;
+  private currentLocation?: { latitude: number; longitude: number };
 
   constructor(
     id: string,
@@ -89,6 +90,13 @@ export class Passenger extends User {
       throw new Error('El monto debe ser mayor a 0');
     }
     this.walletBalance += amount;
+  }
+  public updateLocation(latitude: number, longitude: number): void {
+    this.currentLocation = { latitude, longitude };
+  }
+
+  public getCurrentLocation(): { latitude: number; longitude: number } | undefined {
+    return this.currentLocation;
   }
 
   // Getters

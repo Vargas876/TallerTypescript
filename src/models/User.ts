@@ -1,7 +1,7 @@
 import type { IContact, UserRole } from '../interfaces/index';
 
 /**
- * Clase base User para el sistema InDriver
+ * Clase base User para el sistema GoDrive
  * Implementa POO con encapsulación, abstracción y herencia
  */
 export abstract class User {

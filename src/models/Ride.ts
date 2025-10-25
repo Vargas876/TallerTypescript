@@ -1,7 +1,7 @@
 import type { IPayment, IRideLocation, RideStatus } from '../interfaces/index';
 
 /**
- * Clase Ride - Representa un viaje en InDriver
+ * Clase Ride - Representa un viaje en GoDrive
  */
 export class Ride {
   private id: string;

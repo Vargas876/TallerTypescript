@@ -1,31 +1,24 @@
 import type {
-    IContact,
-    IPayment,
-    IRating,
-    IRideLocation,
-    IVehicle
+  IContact,
+  IPayment,
+  IRating,
+  IRideLocation,
+  IVehicle
 } from '../interfaces/index';
-import { Administrator } from '../models/Administrator';
-import { Driver } from '../models/Driver';
-import { Passenger } from '../models/Passenger';
-import { Ride } from '../models/Ride';
-import { Database } from './database';
+import { MongoDatabase } from './mongoDatabase';
 
-/**
- * Servicio para gestionar la lógica de negocio de InDriver
- */
 export class RideService {
-  private db: Database;
+  private db: MongoDatabase;
 
   constructor() {
-    this.db = Database.getInstance();
+    this.db = MongoDatabase.getInstance();
   }
 
   // ============================================
   // GESTIÓN DE CONDUCTORES
   // ============================================
 
-  public createDriver(
+  public async createDriver(
     id: string,
     firstName: string,
     lastName: string,
@@ -34,97 +27,126 @@ export class RideService {
     driverId: string,
     licenseNumber: string,
     vehicle: IVehicle
-  ): Driver {
-    const driver = new Driver(
+  ): Promise<any> {
+    const driverData = {
       id,
       firstName,
       lastName,
       email,
       contact,
+      role: 'DRIVER',
       driverId,
       licenseNumber,
-      vehicle
-    );
+      vehicle,
+      ratings: [],
+      totalRides: 0,
+      availableForRides: true,
+      earnings: 0,
+      isActive: true
+    };
     
-    this.db.createUser(driver);
-    return driver;
+    await this.db.createUser(driverData);
+    return driverData;
   }
 
-  public updateDriverLocation(driverId: string, latitude: number, longitude: number): void {
-    const user = this.db.getUserById(driverId);
-    if (!user || !(user instanceof Driver)) {
+  public async updateDriverLocation(driverId: string, latitude: number, longitude: number): Promise<void> {
+    const driver = await this.db.getUserById(driverId);
+    if (!driver || driver.role !== 'DRIVER') {
       throw new Error('Conductor no encontrado');
     }
-    user.updateLocation(latitude, longitude);
-    this.db.updateUser(driverId, user);
+    
+    await this.db.updateUser(driverId, {
+      currentLocation: { latitude, longitude }
+    });
   }
 
-  public setDriverAvailability(driverId: string, available: boolean): void {
-    const user = this.db.getUserById(driverId);
-    if (!user || !(user instanceof Driver)) {
+  public async setDriverAvailability(driverId: string, available: boolean): Promise<void> {
+    const driver = await this.db.getUserById(driverId);
+    if (!driver || driver.role !== 'DRIVER') {
       throw new Error('Conductor no encontrado');
     }
-    user.setAvailability(available);
-    this.db.updateUser(driverId, user);
+    
+    await this.db.updateUser(driverId, {
+      availableForRides: available
+    });
   }
 
-  public rateDriver(driverId: string, rating: IRating): void {
-    const user = this.db.getUserById(driverId);
-    if (!user || !(user instanceof Driver)) {
+  public async rateDriver(driverId: string, rating: IRating): Promise<void> {
+    const driver = await this.db.getUserById(driverId);
+    if (!driver || driver.role !== 'DRIVER') {
       throw new Error('Conductor no encontrado');
     }
-    user.addRating(rating);
-    this.db.updateUser(driverId, user);
+    
+    const ratings = [...(driver.ratings || []), rating];
+    const avgRating = ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length;
+    
+    await this.db.updateUser(driverId, {
+      ratings,
+      averageRating: avgRating
+    });
   }
 
   // ============================================
   // GESTIÓN DE PASAJEROS
   // ============================================
 
-  public createPassenger(
+  public async createPassenger(
     id: string,
     firstName: string,
     lastName: string,
     email: string,
     contact: IContact,
     passengerId: string
-  ): Passenger {
-    const passenger = new Passenger(
+  ): Promise<any> {
+    const passengerData = {
       id,
       firstName,
       lastName,
       email,
       contact,
-      passengerId
-    );
+      role: 'PASSENGER',
+      passengerId,
+      ratings: [],
+      ridesCount: 0,
+      favoriteDrivers: [],
+      paymentHistory: [],
+      walletBalance: 0,
+      isActive: true
+    };
     
-    this.db.createUser(passenger);
-    return passenger;
+    await this.db.createUser(passengerData);
+    return passengerData;
   }
 
-  public addFundsToPassenger(passengerId: string, amount: number): void {
-    const user = this.db.getUserById(passengerId);
-    if (!user || !(user instanceof Passenger)) {
+  public async addFundsToPassenger(passengerId: string, amount: number): Promise<void> {
+    const passenger = await this.db.getUserById(passengerId);
+    if (!passenger || passenger.role !== 'PASSENGER') {
       throw new Error('Pasajero no encontrado');
     }
-    user.addFunds(amount);
-    this.db.updateUser(passengerId, user);
+    
+    await this.db.updateUser(passengerId, {
+      walletBalance: (passenger.walletBalance || 0) + amount
+    });
   }
 
-  public addFavoriteDriver(passengerId: string, driverId: string): void {
-    const user = this.db.getUserById(passengerId);
-    if (!user || !(user instanceof Passenger)) {
+  public async addFavoriteDriver(passengerId: string, driverId: string): Promise<void> {
+    const passenger = await this.db.getUserById(passengerId);
+    if (!passenger || passenger.role !== 'PASSENGER') {
       throw new Error('Pasajero no encontrado');
     }
-    user.addFavoriteDriver(driverId);
-    this.db.updateUser(passengerId, user);
+    
+    const favoriteDrivers = [...(passenger.favoriteDrivers || [])];
+    if (!favoriteDrivers.includes(driverId)) {
+      favoriteDrivers.push(driverId);
+      await this.db.updateUser(passengerId, { favoriteDrivers });
+    }
   }
 
   // ============================================
   // GESTIÓN DE ADMINISTRADORES
   // ============================================
 
-  public createAdministrator(
+  public async createAdministrator(
     id: string,
     firstName: string,
     lastName: string,
@@ -133,27 +155,30 @@ export class RideService {
     adminId: string,
     department: string,
     accessLevel: number = 2
-  ): Administrator {
-    const admin = new Administrator(
+  ): Promise<any> {
+    const adminData = {
       id,
       firstName,
       lastName,
       email,
       contact,
+      role: 'ADMINISTRATOR',
       adminId,
       department,
-      accessLevel
-    );
+      accessLevel,
+      managedCities: [],
+      isActive: true
+    };
     
-    this.db.createUser(admin);
-    return admin;
+    await this.db.createUser(adminData);
+    return adminData;
   }
 
   // ============================================
   // GESTIÓN DE VIAJES
   // ============================================
 
-  public createRide(
+  public async createRide(
     id: string,
     passengerId: string,
     origin: IRideLocation,
@@ -161,141 +186,146 @@ export class RideService {
     requestedPrice: number,
     distance: number,
     estimatedDuration: number
-  ): Ride {
-    // Verificar que el pasajero existe
-    const passenger = this.db.getUserById(passengerId);
-    if (!passenger || !(passenger instanceof Passenger)) {
+  ): Promise<any> {
+    const passenger = await this.db.getUserById(passengerId);
+    if (!passenger || passenger.role !== 'PASSENGER') {
       throw new Error('Pasajero no encontrado');
     }
 
-    const ride = new Ride(
+    const rideData = {
       id,
       passengerId,
       origin,
       destination,
+      status: 'REQUESTED',
       requestedPrice,
       distance,
       estimatedDuration
-    );
+    };
     
-    this.db.createRide(ride);
-    return ride;
+    await this.db.createRide(rideData);
+    return rideData;
   }
 
-  public acceptRide(rideId: string, driverId: string): void {
-    const ride = this.db.getRideById(rideId);
-    if (!ride) {
-      throw new Error('Viaje no encontrado');
-    }
+  public async acceptRide(rideId: string, driverId: string): Promise<void> {
+    const ride = await this.db.getRideById(rideId);
+    if (!ride) throw new Error('Viaje no encontrado');
+    if (ride.status !== 'REQUESTED') throw new Error('El viaje ya fue aceptado');
 
-    const driver = this.db.getUserById(driverId);
-    if (!driver || !(driver instanceof Driver)) {
-      throw new Error('Conductor no encontrado');
-    }
+    const driver = await this.db.getUserById(driverId);
+    if (!driver || driver.role !== 'DRIVER') throw new Error('Conductor no encontrado');
 
-    ride.acceptRide(driverId);
-    this.db.updateRide(rideId, ride);
+    await this.db.updateRide(rideId, {
+      driverId,
+      status: 'ACCEPTED'
+    });
   }
 
-  public startRide(rideId: string): void {
-    const ride = this.db.getRideById(rideId);
-    if (!ride) {
-      throw new Error('Viaje no encontrado');
-    }
+  public async startRide(rideId: string): Promise<void> {
+    const ride = await this.db.getRideById(rideId);
+    if (!ride) throw new Error('Viaje no encontrado');
+    if (ride.status !== 'ACCEPTED') throw new Error('El viaje debe ser aceptado primero');
 
-    ride.startRide();
-    this.db.updateRide(rideId, ride);
+    await this.db.updateRide(rideId, {
+      status: 'IN_PROGRESS',
+      startedAt: new Date()
+    });
   }
 
-  public completeRide(rideId: string, finalPrice: number, payment: IPayment): void {
-    const ride = this.db.getRideById(rideId);
-    if (!ride) {
-      throw new Error('Viaje no encontrado');
-    }
+  public async completeRide(rideId: string, finalPrice: number, payment: IPayment): Promise<void> {
+    const ride = await this.db.getRideById(rideId);
+    if (!ride) throw new Error('Viaje no encontrado');
+    if (ride.status !== 'IN_PROGRESS') throw new Error('El viaje debe estar en progreso');
 
-    ride.completeRide(finalPrice, payment);
-    this.db.updateRide(rideId, ride);
+    await this.db.updateRide(rideId, {
+      status: 'COMPLETED',
+      finalPrice,
+      payment,
+      completedAt: new Date()
+    });
 
-    // Actualizar estadísticas del conductor
-    const driverId = ride.getDriverId();
-    if (driverId) {
-      const driver = this.db.getUserById(driverId);
-      if (driver instanceof Driver) {
-        driver.incrementRides();
-        driver.addEarnings(finalPrice);
-        this.db.updateUser(driverId, driver);
+    // Actualizar conductor
+    if (ride.driverId) {
+      const driver = await this.db.getUserById(ride.driverId);
+      if (driver) {
+        await this.db.updateUser(ride.driverId, {
+          totalRides: (driver.totalRides || 0) + 1,
+          earnings: (driver.earnings || 0) + finalPrice
+        });
       }
     }
 
-    // Actualizar estadísticas del pasajero
-    const passengerId = ride.getPassengerId();
-    const passenger = this.db.getUserById(passengerId);
-    if (passenger instanceof Passenger) {
-      passenger.incrementRides();
-      passenger.addPayment(payment);
-      this.db.updateUser(passengerId, passenger);
+    // Actualizar pasajero
+    const passenger = await this.db.getUserById(ride.passengerId);
+    if (passenger) {
+      const paymentHistory = [...(passenger.paymentHistory || []), payment];
+      await this.db.updateUser(ride.passengerId, {
+        ridesCount: (passenger.ridesCount || 0) + 1,
+        paymentHistory,
+        walletBalance: payment.method === 'WALLET' 
+          ? (passenger.walletBalance || 0) - payment.amount 
+          : passenger.walletBalance
+      });
     }
   }
 
-  public cancelRide(rideId: string, reason?: string): void {
-    const ride = this.db.getRideById(rideId);
-    if (!ride) {
-      throw new Error('Viaje no encontrado');
-    }
+  public async cancelRide(rideId: string, reason?: string): Promise<void> {
+    const ride = await this.db.getRideById(rideId);
+    if (!ride) throw new Error('Viaje no encontrado');
+    if (ride.status === 'COMPLETED') throw new Error('No se puede cancelar un viaje completado');
 
-    ride.cancelRide(reason);
-    this.db.updateRide(rideId, ride);
+    await this.db.updateRide(rideId, {
+      status: 'CANCELLED',
+      notes: reason
+    });
   }
 
   // ============================================
   // CONSULTAS
   // ============================================
 
-  public getUserInfo(userId: string): Record<string, any> | null {
-    const user = this.db.getUserById(userId);
-    return user ? user.getDisplayInfo() : null;
+  public async getUserInfo(userId: string): Promise<any | null> {
+    return await this.db.getUserById(userId);
   }
 
-  public listAllUsers(): Record<string, any>[] {
-    return this.db.getAllUsers().map(user => user.getDisplayInfo());
+  public async listAllUsers(): Promise<any[]> {
+    return await this.db.getAllUsers();
   }
 
-  public listAllDrivers(): Record<string, any>[] {
-    return this.db.getUsersByRole('DRIVER').map(user => user.getDisplayInfo());
+  public async listAllDrivers(): Promise<any[]> {
+    return await this.db.getUsersByRole('DRIVER');
   }
 
-  public listAllPassengers(): Record<string, any>[] {
-    return this.db.getUsersByRole('PASSENGER').map(user => user.getDisplayInfo());
+  public async listAllPassengers(): Promise<any[]> {
+    return await this.db.getUsersByRole('PASSENGER');
   }
 
-  public listAvailableDrivers(): Record<string, any>[] {
-    return this.db.getUsersByRole('DRIVER')
-      .filter(user => user instanceof Driver && user.isAvailable())
-      .map(user => user.getDisplayInfo());
+  public async listAvailableDrivers(): Promise<any[]> {
+    const drivers = await this.db.getUsersByRole('DRIVER');
+    return drivers.filter(d => d.availableForRides);
   }
 
-  public getRideInfo(rideId: string): Record<string, any> | null {
-    const ride = this.db.getRideById(rideId);
-    return ride ? ride.toJSON() : null;
+  public async getRideInfo(rideId: string): Promise<any | null> {
+    return await this.db.getRideById(rideId);
   }
 
-  public listAllRides(): Record<string, any>[] {
-    return this.db.getAllRides().map(ride => ride.toJSON());
+  public async listAllRides(): Promise<any[]> {
+    return await this.db.getAllRides();
   }
 
-  public listRidesByPassenger(passengerId: string): Record<string, any>[] {
-    return this.db.getRidesByPassenger(passengerId).map(ride => ride.toJSON());
+  public async listRidesByPassenger(passengerId: string): Promise<any[]> {
+    return await this.db.getRidesByPassenger(passengerId);
   }
 
-  public listRidesByDriver(driverId: string): Record<string, any>[] {
-    return this.db.getRidesByDriver(driverId).map(ride => ride.toJSON());
+  public async listRidesByDriver(driverId: string): Promise<any[]> {
+    return await this.db.getRidesByDriver(driverId);
   }
 
-  public listAvailableRides(): Record<string, any>[] {
-    return this.db.getRidesByStatus('REQUESTED').map(ride => ride.toJSON());
+  public async listAvailableRides(): Promise<any[]> {
+    return await this.db.getRidesByStatus('REQUESTED');
   }
 
-  public getSystemStatistics(): Record<string, any> {
-    return this.db.getStatistics();
+  public async getSystemStatistics(): Promise<any> {
+    return await this.db.getStatistics();
   }
 }
